@@ -11,7 +11,7 @@ const ProfileForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCcGgvUZ_JtGAAFL68pNGWEGcdS2N2wV5c",
+      "https://identitytoolkit.googleapis.com/v1/accounts:update?key=[API_KEY]",
       {
         method: "POST",
         headers: {

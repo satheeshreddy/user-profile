@@ -47,8 +47,8 @@ const AuthForm = () => {
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
           let url = isLogin
-            ? "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCcGgvUZ_JtGAAFL68pNGWEGcdS2N2wV5c"
-            : "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCcGgvUZ_JtGAAFL68pNGWEGcdS2N2wV5c";
+            ? "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]"
+            : "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]";
 
           fetch(url, {
             method: "POST",
@@ -73,7 +73,9 @@ const AuthForm = () => {
               }
             })
             .then((responseData) => {
-              authCtx.login(responseData.idToken);
+              const expirationTime = new Date(new Date().getTime() + (+responseData.expiresIn * 1000));
+              authCtx.login(responseData.idToken, expirationTime.toISOString());
+              
               navigate("/");
             })
             .catch((error) => {
