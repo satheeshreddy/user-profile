@@ -13,7 +13,15 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/auth" element={!isLoggedIn && <AuthPage />} />
+        <Route
+          path="/auth"
+          element={
+            <>
+              {!isLoggedIn && <AuthPage />}
+              {isLoggedIn && <Navigate to="/" />}
+            </>
+          }
+        />
         <Route
           path="/profile"
           element={
